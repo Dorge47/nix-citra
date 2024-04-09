@@ -1,5 +1,5 @@
 with import <nixpkgs> {} ;
-{ branch ? "nightly" }:
+{ branch ? "master" }:
 
 let
   # Fetched from https://api.citra-emu.org/gamedb
@@ -10,30 +10,15 @@ let
     hash = "sha256-J+zqtWde5NgK2QROvGewtXGRAWUTNSKHNMG6iu9m1fU=";
   };
 in {
-  nightly = qt6Packages.callPackage ./generic.nix rec {
-    pname = "citra-nightly";
-    version = "2088";
+  master = qt6Packages.callPackage ./generic.nix rec {
+    pname = "citra";
+    version = "r0c2f076";
 
     src = fetchFromGitHub {
-      owner = "citra-emu";
-      repo = "citra-nightly";
-      rev = "nightly-${version}";
-      sha256 = "0l9w4i0zbafcv2s6pd1zqb11vh0i7gzwbqnzlz9al6ihwbsgbj3k";
-      fetchSubmodules = true;
-    };
-
-    inherit branch compat-list;
-  };
-
-  canary = qt6Packages.callPackage ./generic.nix rec {
-    pname = "citra-canary";
-    version = "2766";
-
-    src = fetchFromGitHub {
-      owner = "citra-emu";
-      repo = "citra-canary";
-      rev = "canary-${version}";
-      sha256 = "1gm3ajphpzwhm3qnchsx77jyl51za8yw3r0j0h8idf9y1ilcjvi4";
+      owner = "PabloMK7";
+      repo = "citra";
+      rev = "r0c2f076";
+      sha256 = ""; # Will get hash from error message
       fetchSubmodules = true;
     };
 
