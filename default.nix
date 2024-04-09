@@ -18,7 +18,7 @@ in {
       owner = "PabloMK7";
       repo = "citra";
       rev = "r0c2f076";
-      sha256 = "luwxC3iPl+13q/E6putRJzCcez1EZBippY4/px1bdL8"; # Will get hash from error message
+      sha256 = "sha256-luwxC3iPl+13q/E6putRJzCcez1EZBippY4/px1bdL8=";
       fetchSubmodules = true;
     };
 
