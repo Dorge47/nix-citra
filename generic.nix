@@ -35,7 +35,7 @@
 , useDiscordRichPresence ? false, rapidjson
 }:
 stdenv.mkDerivation {
-  inherit pname src;
+  inherit pname version src;
 
   nativeBuildInputs = [
     cmake
@@ -106,7 +106,7 @@ stdenv.mkDerivation {
       --replace "check_submodules_present()" ""
 
     # Add versions
-    echo 'set(BUILD_FULLNAME "PabloMK7 r0c2f076")' >> CMakeModules/GenerateBuildInfo.cmake
+    echo 'set(BUILD_FULLNAME "PabloMK7 ${version}")' >> CMakeModules/GenerateBuildInfo.cmake
 
     # Add gamemode
     substituteInPlace externals/gamemode/include/gamemode_client.h --replace "libgamemode.so.0" "${lib.getLib gamemode}/lib/libgamemode.so.0"
@@ -126,7 +126,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     broken = (stdenv.isLinux && stdenv.isAarch64);
     homepage = "https://citra-emu.org";
-    description = "The r0c2f076 release of an open-source emulator for the Nintendo 3DS";
+    description = "The ${version} release of an open-source emulator for the Nintendo 3DS";
     longDescription = ''
       A Nintendo 3DS Emulator written in C++
       This package uses PabloMK7's fork after the main repo was taken down in
