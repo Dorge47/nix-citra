@@ -1,4 +1,5 @@
 { pname
+, version
 , src
 , compat-list
 
