@@ -11,7 +11,6 @@ let
 in {
   master = qt6Packages.callPackage ./generic.nix rec {
     pname = "citra";
-    version = "r0c2f076";
 
     src = fetchFromGitHub {
       owner = "PabloMK7";
