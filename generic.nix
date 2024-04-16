@@ -1,7 +1,5 @@
 { pname
-, version
 , src
-, branch
 , compat-list
 
 , lib
@@ -37,7 +35,7 @@
 , useDiscordRichPresence ? false, rapidjson
 }:
 stdenv.mkDerivation {
-  inherit pname version src;
+  inherit pname src;
 
   nativeBuildInputs = [
     cmake
@@ -95,9 +93,7 @@ stdenv.mkDerivation {
   # causes redefinition of _FORTIFY_SOURCE
   hardeningDisable = [ "fortify3" ];
 
-  postPatch = let
-    branchCaptialized = (lib.toUpper (lib.substring 0 1 branch) + lib.substring 1 (-1) branch);
-  in ''
+  postPatch = ''
     # Fix file not found when looking in var/empty instead of opt
     mkdir externals/dynarmic/src/dynarmic/ir/var
     ln -s ../opt externals/dynarmic/src/dynarmic/ir/var/empty
@@ -110,7 +106,7 @@ stdenv.mkDerivation {
       --replace "check_submodules_present()" ""
 
     # Add versions
-    echo 'set(BUILD_FULLNAME "${branchCaptialized} ${version}")' >> CMakeModules/GenerateBuildInfo.cmake
+    echo 'set(BUILD_FULLNAME "PabloMK7 r0c2f076")' >> CMakeModules/GenerateBuildInfo.cmake
 
     # Add gamemode
     substituteInPlace externals/gamemode/include/gamemode_client.h --replace "libgamemode.so.0" "${lib.getLib gamemode}/lib/libgamemode.so.0"
@@ -130,12 +126,11 @@ stdenv.mkDerivation {
   meta = with lib; {
     broken = (stdenv.isLinux && stdenv.isAarch64);
     homepage = "https://citra-emu.org";
-    description = "The ${branch} branch of an open-source emulator for the Nintendo 3DS";
+    description = "The r0c2f076 release of an open-source emulator for the Nintendo 3DS";
     longDescription = ''
       A Nintendo 3DS Emulator written in C++
-      Using the nightly branch is recommended for general usage.
-      Using the canary branch is recommended if you would like to try out
-      experimental features, with a cost of stability.
+      This package uses PabloMK7's fork after the main repo was taken down in
+      March of 2024.
     '';
     mainProgram = if enableQt then "citra-qt" else "citra";
     platforms = platforms.linux;

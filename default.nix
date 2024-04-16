@@ -1,5 +1,4 @@
 with import <nixpkgs> {} ;
-{ branch ? "master" }:
 
 let
   # Fetched from https://api.citra-emu.org/gamedb
@@ -22,6 +21,6 @@ in {
       fetchSubmodules = true;
     };
 
-    inherit branch compat-list;
+    inherit compat-list;
   };
-}.${branch}
+}
